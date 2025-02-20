@@ -22,7 +22,7 @@ export default function Home() {
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter city"
-          className="border border-background rounded-lg px-2 py-2 mr-2  focus:outline-1 focus:outline-background"
+          className=" rounded-lg px-2 py-2 mr-2  outline-1 outline-background"
         />
         <button
           type="submit"
