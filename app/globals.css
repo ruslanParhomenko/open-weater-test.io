@@ -4,11 +4,12 @@
 
 :root {
   --background: #24506457;
-  --foreground: #183769;
+  --foreground: #385179;
+  --text-color: #011a42;
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text-color);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
