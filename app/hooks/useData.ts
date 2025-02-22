@@ -7,6 +7,7 @@ export const useData = (city: string) => {
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  console.log("city", city);
 
   const API_KEY = process.env.API_KEY;
   const API_URL = process.env.API_URL;
@@ -53,6 +54,7 @@ export const useData = (city: string) => {
       controller.abort();
     };
   }, [city, API_KEY, API_URL]);
+  console.log("weatherDataHOOK", weatherData);
 
   return { weatherData, loading, error };
 };

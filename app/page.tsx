@@ -1,9 +1,11 @@
-import PageCityWather from "./component/page-city-wather";
+import Header from "./component/header";
+import CityWeather from "./component/widgets/city-weather-info";
 
 export default function Home() {
   return (
-    <div className="px-7 w-full h-screen mx-auto pt-7">
-      <PageCityWather />
+    <div className="flex flex-col justify-start gap-4 items-center  w-full h-screen mx-auto pt-7">
+      <Header />
+      <CityWeather />
     </div>
   );
 }

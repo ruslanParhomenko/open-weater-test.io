@@ -2,11 +2,10 @@
 
 import React, { useState } from "react";
 
-import { useInputCity } from "../context/input-city";
-
+import { useContextValue } from "../context/context";
 export default function Header() {
   const [city, setCity] = useState("");
-  const { setSelectedCity } = useInputCity();
+  const { setSelectedCity } = useContextValue();
 
   const handlerAddData = (e: React.FormEvent) => {
     e.preventDefault();
