@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useContextValue } from "../../context/context";
+import { useContextValue } from "../context/context";
 import {
   FormControl,
   Select,
@@ -8,7 +8,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-import { Parameter } from "../../type/data-type";
+import { Parameter } from "../type/data-type";
 
 export default function FormSelect({ parameterDetails }: any) {
   const { selectedParam, setSelectedParam } = useContextValue();
@@ -45,11 +45,12 @@ export default function FormSelect({ parameterDetails }: any) {
           },
         }}
       >
-        {Object.keys(parameterDetails).map((param) => (
-          <MenuItem key={param} value={param}>
-            {parameterDetails[param as Parameter].unit}
-          </MenuItem>
-        ))}
+        {parameterDetails &&
+          Object.keys(parameterDetails).map((param) => (
+            <MenuItem key={param} value={param}>
+              {parameterDetails[param as Parameter].label}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );

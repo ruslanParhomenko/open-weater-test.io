@@ -1,6 +1,7 @@
 "use client";
 import { useContextValue } from "../context/context";
 import { useData } from "../hooks/useData";
+import ButtonFavoritCity from "../ui/button-favorit-city";
 
 import {
   BarChart,
@@ -18,6 +19,7 @@ import {
   FormattedData,
   Parameter,
 } from "../type/data-type";
+import FormSelect from "../ui/form-select";
 
 export default function BarChartComponent() {
   const { selectedCity, selectedParam } = useContextValue();
@@ -28,7 +30,8 @@ export default function BarChartComponent() {
   if (loading) return <p>LOADING...</p>;
   if (error) return <p>ERROR: {error}</p>;
 
-  if (!weatherData?.list) return <p>NO DATA AVAILABLE</p>;
+  if (!weatherData?.list)
+    return <p className="text-[#011a42]">NO DATA AVAILABLE</p>;
 
   const groupedData: GroupedData = weatherData?.list.reduce(
     (acc: GroupedData, item: WeatherItem) => {
@@ -80,35 +83,41 @@ export default function BarChartComponent() {
 
     const data = payload[0].payload;
     return (
-      <div className="bg-white p-2 rounded-lg ">
-        <p className="font-semibold">{`День: ${label}`}</p>
-        <p>{`Температура: ${data.temp} °C`}</p>
-        <p>{`Давление: ${data.pressure} hPa`}</p>
-        <p>{`Влажность: ${data.humidity} %`}</p>
-        <p>{`Скорость ветра: ${data.windSpeed} м/с`}</p>
+      <div className="bg-white p-1 rounded-lg text-xs ">
+        <p className="font-semibold">{`day: ${label}`}</p>
+        <p>{`Temperature: ${data.temp} °C`}</p>
+        <p>{`Pressure: ${data.pressure} hPa`}</p>
+        <p>{`Humidity: ${data.humidity} %`}</p>
+        <p>{`Wind speed: ${data.windSpeed} m/s`}</p>
       </div>
     );
   };
 
   return (
     <div className="flex flex-col justify-between items-center w-full py-4 px-6">
-      <h1 className="text-xl text-foreground font-bold pb-1">
-        {weatherData.city.name}
+      <ButtonFavoritCity />
+      <h1 className="text-3xl text-foreground font-bold pb-3">
+        {weatherData.city.name.toUpperCase()}
       </h1>
 
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={formattedData}>
-          <XAxis dataKey="day" stroke="#24506457" />
+      <ResponsiveContainer width="95%" height={300}>
+        <BarChart
+          data={formattedData}
+          margin={{ top: 20, bottom: 10, right: 0, left: -20 }}
+        >
+          <Tooltip content={<CustomTooltip />} />
+          <XAxis dataKey="day" stroke="#011a42" tick={{ fontSize: 14 }} />
           <YAxis
-            stroke="#24506457"
+            stroke="#011a42"
             domain={["auto", "auto"]}
             allowDataOverflow={true}
+            tick={{ fontSize: 14 }}
           />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
+          {/* <Legend /> */}
           <Bar dataKey={selectedParam} fill="#385179" name={label} />
         </BarChart>
       </ResponsiveContainer>
+      <FormSelect parameterDetails={parameterDetails} />
     </div>
   );
 }

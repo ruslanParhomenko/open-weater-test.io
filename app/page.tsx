@@ -1,5 +1,5 @@
 import Header from "./component/header";
-import CityWeather from "./component/widgets/city-weather-info";
+import CityWeather from "./widgets/city-weather-info";
 
 export default function Home() {
   return (

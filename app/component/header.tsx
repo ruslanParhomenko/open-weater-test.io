@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex flex-col items-center pt-14">
+    <div className="flex flex-col items-center  pt-14">
       <h1 className="text-xl font-bold pb-6">Weather Forecast</h1>
       <form className="mb-4" onSubmit={handlerAddData}>
         <input
@@ -24,7 +24,7 @@ export default function Header() {
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter city"
-          className="rounded-lg px-2 py-2 mr-2 outline-1 outline-background"
+          className="rounded-lg px-4 py-2 mr-2 outline-1 outline-background"
         />
         <button
           type="submit"
