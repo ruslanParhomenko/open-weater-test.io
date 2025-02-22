@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -23,10 +22,7 @@ import FormSelect from "../ui/form-select";
 
 export default function BarChartComponent() {
   const { selectedCity, selectedParam } = useContextValue();
-  console.log("selectedCity", selectedCity);
-
   const { weatherData, loading, error } = useData(selectedCity);
-  console.log("weatherData", weatherData);
   if (loading) return <p>LOADING...</p>;
   if (error) return <p>ERROR: {error}</p>;
 
@@ -113,7 +109,7 @@ export default function BarChartComponent() {
             allowDataOverflow={true}
             tick={{ fontSize: 14 }}
           />
-          {/* <Legend /> */}
+
           <Bar dataKey={selectedParam} fill="#385179" name={label} />
         </BarChart>
       </ResponsiveContainer>
