@@ -1,7 +1,8 @@
 "use client";
 import { useContextValue } from "../context/context";
-import { useData } from "../hooks/useData";
-import ButtonFavoritCity from "../ui/button-favorit-city";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useSwipeable } from "react-swipeable";
 
 import {
   BarChart,
@@ -20,11 +21,20 @@ import {
 } from "../type/data-type";
 import FormSelect from "../ui/form-select";
 
-export default function BarChartComponent() {
-  const { selectedCity, selectedParam } = useContextValue();
-  const { weatherData, loading, error } = useData(selectedCity);
-  if (loading) return <p>LOADING...</p>;
-  if (error) return <p>ERROR: {error}</p>;
+export default function PageSelectFavoritCity() {
+  const { id } = useParams();
+  const { state, selectedParam } = useContextValue();
+  const router = useRouter();
+  const left = "/favorits";
+  const right = "/";
+  const handlers = useSwipeable({
+    onSwipedRight: () => router.push(left),
+    onSwipedLeft: () => router.push(right),
+  });
+
+  if (!id) return null;
+
+  const weatherData = state.filter((city) => city.city.id === +id)[0];
 
   if (!weatherData?.list) return null;
 
@@ -89,7 +99,10 @@ export default function BarChartComponent() {
   };
 
   return (
-    <div className=" border border-background bg-white rounded-3xl w-full max-w-[340px] min-h-10 px-4 flex flex-col justify-center items-center">
+    <div
+      {...handlers}
+      className=" border border-background bg-white rounded-3xl w-full max-w-[340px] h-1/2 min-h-10 px-4 py-4 flex flex-col justify-center items-center"
+    >
       <h1 className="text-3xl text-foreground font-bold py-3">
         {weatherData.city.name.toUpperCase()}
       </h1>
@@ -112,7 +125,6 @@ export default function BarChartComponent() {
         </BarChart>
       </ResponsiveContainer>
       <FormSelect parameterDetails={parameterDetails} />
-      <ButtonFavoritCity data={weatherData} />
     </div>
   );
 }

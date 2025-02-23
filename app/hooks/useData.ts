@@ -7,7 +7,6 @@ export const useData = (city: string) => {
   const [weatherData, setWeatherData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  console.log("city", city);
 
   const API_KEY = process.env.API_KEY;
   const API_URL = process.env.API_URL;
@@ -20,7 +19,7 @@ export const useData = (city: string) => {
     }
 
     if (!API_KEY || !API_URL) {
-      setError("API ключи или URL отсутствуют в переменных окружения.");
+      setError("API keys or URL are missing in the environment variables.");
       return;
     }
 
@@ -41,8 +40,8 @@ export const useData = (city: string) => {
         if (isCancel(err)) {
           return;
         }
-        console.error("Ошибка загрузки данных:", err);
-        setError(err.message || "Не удалось загрузить данные о погоде");
+        console.error("Data loading error:", err);
+        setError(err.message || "Failed to load weather data.");
       } finally {
         setLoading(false);
       }
@@ -54,7 +53,6 @@ export const useData = (city: string) => {
       controller.abort();
     };
   }, [city, API_KEY, API_URL]);
-  console.log("weatherDataHOOK", weatherData);
 
   return { weatherData, loading, error };
 };

@@ -1,3 +1,10 @@
+export interface WeatherItem {
+  dt_txt: string;
+  main: { temp: number; pressure: number; humidity: number };
+  wind: { speed: number };
+}
+
+//bar-chart
 export interface GroupedData {
   [day: string]: {
     day: string;
@@ -9,12 +16,6 @@ export interface GroupedData {
   };
 }
 
-export interface WeatherItem {
-  dt_txt: string;
-  main: { temp: number; pressure: number; humidity: number };
-  wind: { speed: number };
-}
-
 export interface FormattedData {
   day: string;
   temp: string;
@@ -23,11 +24,25 @@ export interface FormattedData {
   windSpeed: string;
 }
 
-export type Parameter = "temp" | "pressure" | "humidity" | "windSpeed";
-
+//context
 export interface ContextType {
   selectedCity: string;
   setSelectedCity: (city: string) => void;
   selectedParam: Parameter;
   setSelectedParam: (param: Parameter) => void;
+  state: CityDataType[];
+  dispatch: React.Dispatch<Action>;
+}
+export type Parameter = "temp" | "pressure" | "humidity" | "windSpeed";
+export type Action = {
+  type: "ADD_FAVORIT" | "REMOVE_FAVORIT";
+  payload: CityDataType;
+};
+
+export interface CityDataType {
+  city: {
+    id: number;
+    name: string;
+  };
+  list: WeatherItem[];
 }
