@@ -1,6 +1,12 @@
 "use client";
 
-import { useContext, createContext, useState, ReactNode } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  ReactNode,
+  useReducer,
+} from "react";
 
 import { ContextType, Parameter } from "../type/data-type";
 

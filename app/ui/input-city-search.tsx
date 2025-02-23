@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { useContextValue } from "../context/context";
-export default function Header() {
+export default function InputSearch() {
   const [city, setCity] = useState("");
   const { setSelectedCity } = useContextValue();
 
@@ -17,7 +17,6 @@ export default function Header() {
 
   return (
     <div className="flex flex-col items-center  pt-12">
-      <h1 className="text-xl font-bold pb-6">Weather Forecast</h1>
       <form
         className="mb-4 flex justify-center items-center gap-4"
         onSubmit={handlerAddData}

@@ -29,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen justify-center items-center`}
       >
+        <h1 className="text-2xl font-bold py-6">Weather Forecast</h1>
         <ContextProvider>{children}</ContextProvider>
       </body>
     </html>
