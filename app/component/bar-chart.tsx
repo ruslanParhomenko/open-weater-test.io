@@ -26,8 +26,7 @@ export default function BarChartComponent() {
   if (loading) return <p>LOADING...</p>;
   if (error) return <p>ERROR: {error}</p>;
 
-  if (!weatherData?.list)
-    return <p className="text-[#011a42]">NO DATA AVAILABLE</p>;
+  if (!weatherData?.list) return <p className="text-[#011a42]">NO DATA</p>;
 
   const groupedData: GroupedData = weatherData?.list.reduce(
     (acc: GroupedData, item: WeatherItem) => {
@@ -91,7 +90,6 @@ export default function BarChartComponent() {
 
   return (
     <div className="flex flex-col justify-between items-center w-full py-4 px-6">
-      <ButtonFavoritCity />
       <h1 className="text-3xl text-foreground font-bold pb-3">
         {weatherData.city.name.toUpperCase()}
       </h1>
@@ -114,6 +112,7 @@ export default function BarChartComponent() {
         </BarChart>
       </ResponsiveContainer>
       <FormSelect parameterDetails={parameterDetails} />
+      <ButtonFavoritCity />
     </div>
   );
 }
