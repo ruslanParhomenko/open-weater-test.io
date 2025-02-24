@@ -12,7 +12,51 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
+
+``
+
+# Project Configuration Guide
+
+## Environment Configuration
+
+This project uses `next.config.js` to store the API URL and API KEY during development. However, for production deployment, these values must be moved to the environment variables.
+
+### Development
+In the development environment, the API URL and API KEY are stored within `next.config.js`:
+```javascript
+module.exports = {
+  env: {
+    API_URL: "https://dev.example.com/api",
+    API_KEY: "your-development-api-key",
+  },
+};
 ```
+
+### Production
+For production, ensure that these values are placed in a `.env` file or set as system environment variables:
+```env
+NEXT_PUBLIC_API_URL=https://prod.example.com/api
+NEXT_PUBLIC_API_KEY=your-production-api-key
+```
+
+Then, access them in your Next.js application using:
+```javascript
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+```
+
+### Navigation
+The application supports navigation between pages using swipe gestures for a smoother user experience.
+
+### Important Notes
+- Never commit API keys or sensitive information to your repository.
+- Use `.gitignore` to exclude `.env` files from version control.
+- Ensure that your hosting provider supports environment variables and correctly configures them before deploying.
+
+For further details, check the Next.js documentation on [Environment Variables](https://nextjs.org/docs/basic-features/environment-variables).
+
+`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
